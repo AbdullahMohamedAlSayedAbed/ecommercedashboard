@@ -1,11 +1,13 @@
+import 'package:ecommercedashboard/core/enums/order_enum.dart';
 import 'package:ecommercedashboard/core/utils/app_style.dart';
-import 'package:ecommercedashboard/features/orders/data/models/order_model.dart';
+import 'package:ecommercedashboard/core/widgets/custom_network_image.dart';
+import 'package:ecommercedashboard/features/orders/domin/entites/order_entity.dart';
 import 'package:flutter/material.dart';
 
 // Assuming your model classes (OrderModel, ShippingAddressModel, OrderProductModel) are already imported
 
 class OrderItemWidget extends StatelessWidget {
-  final OrderModel order;
+  final OrderEntity order;
 
   const OrderItemWidget({super.key, required this.order});
 
@@ -28,20 +30,48 @@ class OrderItemWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Row(
+              children: [
+                const Icon(Icons.monetization_on, color: Colors.green),
+                const SizedBox(width: 4),
+                Text(
+                  "totalPrice: \$${order.totalPrice.toStringAsFixed(2)}",
+                  style: headerStyle,
+                ),
+                const Spacer(),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color:
+                        order.status == OrderStatus.delivered
+                            ? Colors.green
+                            : order.status == OrderStatus.cancelled
+                            ? Colors.red
+                            : Colors.amber,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    order.status.name,
+                    style: bodyStyle.copyWith(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
             // Order ID and Total Price
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Order ID: ${order.uID}", style: headerStyle),
-                Row(
-                  children: [
-                    const Icon(Icons.monetization_on, color: Colors.green),
-                    const SizedBox(width: 4),
-                    Text(
-                      "\$${order.totalPrice.toStringAsFixed(2)}",
-                      style: headerStyle,
-                    ),
-                  ],
+                Flexible(
+                  child: Text(
+                    "Order ID: ${order.uID}",
+                    style: headerStyle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
@@ -55,7 +85,7 @@ class OrderItemWidget extends StatelessWidget {
             const SizedBox(height: 4),
             Text(order.shippingAddress.name ?? '', style: bodyStyle),
             Text(
-              "${order.shippingAddress.address ?? ''}, ${order.shippingAddress.city ?? ''}",
+              "${order.shippingAddress.address ?? ''}, ${order.shippingAddress.city ?? ''}, ${order.shippingAddress.addressDetails ?? ''}",
               style: bodyStyle,
             ),
             const SizedBox(height: 8),
@@ -93,12 +123,7 @@ class OrderItemWidget extends StatelessWidget {
                     width: 50,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
-                      child: Image.network(
-                        product.imageUrl,
-                        width: 50,
-                        height: 50,
-                        fit: BoxFit.cover,
-                      ),
+                      child: CustomNetworkImage(imageUrl: product.imageUrl),
                     ),
                   ),
                   title: Text(product.name, style: subHeaderStyle),

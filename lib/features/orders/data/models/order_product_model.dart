@@ -1,3 +1,5 @@
+import 'package:ecommercedashboard/features/orders/domin/entites/order_product_entity.dart';
+
 class OrderProductModel {
   final String name;
   final String code;
@@ -32,8 +34,8 @@ class OrderProductModel {
       quantity: json['quantity'],
     );
   }
-  OrderProductModel toEntity() {
-    return OrderProductModel(
+  OrderProductEntity toEntity() {
+    return OrderProductEntity(
       name: name,
       code: code,
       imageUrl: imageUrl,

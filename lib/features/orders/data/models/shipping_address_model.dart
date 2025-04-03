@@ -1,3 +1,5 @@
+import 'package:ecommercedashboard/features/orders/domin/entites/shipping_address_entity.dart';
+
 class ShippingAddressModel {
   String? name;
   String? address;
@@ -44,8 +46,8 @@ class ShippingAddressModel {
     };
   }
 
-  ShippingAddressModel toEntity() {
-    return ShippingAddressModel(
+  ShippingAddressEntity toEntity() {
+    return ShippingAddressEntity(
       name: name,
       address: address,
       phone: phone,

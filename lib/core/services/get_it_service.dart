@@ -1,10 +1,11 @@
-
 import 'package:ecommercedashboard/core/repos/images_repo/images_repo.dart';
 import 'package:ecommercedashboard/core/repos/images_repo/images_repo_impl.dart';
 import 'package:ecommercedashboard/core/repos/product_repo/product_repo.dart';
 import 'package:ecommercedashboard/core/repos/product_repo/product_repo_impl.dart';
 import 'package:ecommercedashboard/core/services/database_service.dart';
 import 'package:ecommercedashboard/core/services/firestore_service.dart';
+import 'package:ecommercedashboard/features/orders/data/repos/order_repo_impl.dart';
+import 'package:ecommercedashboard/features/orders/domin/repos/order_repo.dart';
 import 'package:get_it/get_it.dart';
 
 import 'fire_storage.dart';
@@ -16,8 +17,12 @@ void setupSingleton() {
   getIt.registerSingleton<FireStorageService>(FireStorage());
   getIt.registerSingleton<DatabaseService>(FireStoreService());
   getIt.registerSingleton<ImagesRepo>(
-      ImagesRepoImpl(fireStorageService: getIt.get<FireStorageService>()));
-  getIt.registerSingleton<ProductsRepo>(ProductRepoImpl(
-    getIt.get<DatabaseService>(),
-  ));
+    ImagesRepoImpl(fireStorageService: getIt.get<FireStorageService>()),
+  );
+  getIt.registerSingleton<ProductsRepo>(
+    ProductRepoImpl(getIt.get<DatabaseService>()),
+  );
+  getIt.registerSingleton<OrderRepo>(
+    OrderRepoImpl(databaseService: getIt.get<DatabaseService>()),
+  );
 }

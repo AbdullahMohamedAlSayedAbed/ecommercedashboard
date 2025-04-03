@@ -1,11 +1,11 @@
-import 'package:ecommercedashboard/features/orders/data/dummy/get_order_dummy_data.dart';
+import 'package:ecommercedashboard/features/orders/domin/entites/order_entity.dart';
 import 'package:ecommercedashboard/features/orders/presentation/views/widgets/filter_section.dart';
 import 'package:ecommercedashboard/features/orders/presentation/views/widgets/order_item_list_view.dart';
 import 'package:flutter/material.dart';
 
 class OrdersViewBody extends StatelessWidget {
-  const OrdersViewBody({super.key});
-
+  const OrdersViewBody({super.key, required this.orders});
+  final List<OrderEntity> orders;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +15,7 @@ class OrdersViewBody extends StatelessWidget {
         children: [
           SizedBox(height: 16),
           FilterSection(),
-          Expanded(child: OrderItemListView(orders: getSampleOrders())),
+          Expanded(child: OrderItemListView(orders: orders)),
         ],
       ),
     );

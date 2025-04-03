@@ -1,6 +1,7 @@
 abstract class BackendEndpoint {
- static const addUserData = 'users';
- static const getUserData = 'users';
- static const images = 'images';
- static const productsCollection = 'products';
+  static const addUserData = 'users';
+  static const getUserData = 'users';
+  static const images = 'images';
+  static const productsCollection = 'products';
+  static const getOrder = 'Orders';
 }
