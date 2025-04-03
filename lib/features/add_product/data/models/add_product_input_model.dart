@@ -16,9 +16,11 @@ class AddProductInputModel {
   final int numberOfCalories;
   final int unitAmount;
   final num avgRating, ratingCount;
+  final int sellingCount;
   final List<ReviewModel> reviews;
 
   AddProductInputModel({
+    this.sellingCount = 0,
     required this.reviews,
     this.ratingCount = 0,
     this.avgRating = 0,
@@ -50,6 +52,7 @@ class AddProductInputModel {
       image: addProductInputEntity.image,
       price: addProductInputEntity.price,
       code: addProductInputEntity.code,
+      sellingCount: addProductInputEntity.sellingCount,
       isFeatured: addProductInputEntity.isFeatured,
       imageUrl: addProductInputEntity.imageUrl,
       avgRating: addProductInputEntity.avgRating,
@@ -65,6 +68,7 @@ class AddProductInputModel {
       'code': code,
       'isFeatured': isFeatured,
       'imageUrl': imageUrl,
+      'sellingCount': sellingCount,
       'expirationsMonth': expirationsMonth,
       'isOrganic': isOrganic,
       'numberOfCalories': numberOfCalories,

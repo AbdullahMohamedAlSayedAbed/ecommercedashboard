@@ -11,12 +11,19 @@ class DashboardViewBody extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 16,
         children: [
           CustomButton(
             onTap: () {
               Navigator.pushNamed(context, AppRouter.addProductView);
             },
             text: 'Add Product',
+          ),
+          CustomButton(
+            onTap: () {
+              Navigator.pushNamed(context, AppRouter.ordersView);
+            },
+            text: 'View Orders',
           ),
         ],
       ),
